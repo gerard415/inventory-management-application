@@ -37,4 +37,6 @@ UserSchema.methods.createJWT = function(){
     return jwt.sign({name: this.name, userId: this._id}, process.env.JWT_SECRET, {expiresIn: process.env.JWT_LIFETIME} )
 }
 
+
+
 module.exports = mongoose.model('User', UserSchema)

@@ -12,6 +12,14 @@ const register = async (req, res) => {
 }
 
 const login = async (req, res) => {
+    //checking both email and password are available
+    const {email, password} = req.body
+    if(!email || !password){
+        throw new BadRequestError('Please provide both email and password')
+    }
+    
+    
+
     res.send('login user')
 }
 

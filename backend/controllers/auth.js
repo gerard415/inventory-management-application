@@ -18,6 +18,12 @@ const login = async (req, res) => {
         throw new BadRequestError('Please provide both email and password')
     }
     
+    //finding the user with the particular email
+    const user = await User.findOne({email})
+    if(!user){
+        throw new UnauthenticatedError('Invalid credentials')
+    }
+
     
 
     res.send('login user')

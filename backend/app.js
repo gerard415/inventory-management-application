@@ -10,7 +10,8 @@ const connectDB = require('./db/connect');
 
 
 // error handlers
-
+const notFoundMiddleware = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
 //middleware
 app.use(express.json());
@@ -19,7 +20,8 @@ app.use(express.json());
 
 
 //errors
-
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 
 
 const port = process.env.PORT || 5000;

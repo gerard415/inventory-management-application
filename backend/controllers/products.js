@@ -9,12 +9,12 @@ const createProduct = async (req, res) => {
 }
 
 const getAllProducts = async (req, res) => {
-    res.send('get all products')
+    const products = await Product.find({createdBy: req.user.userId}).sort('createdAt')
+    res.status(StatusCodes.OK).json({products, count: products.length})
 }
 
 const getProduct = async (req, res) => {
-    res.send('get single product')
-}
+    res.send('get product')
 
 const updateProduct = async (req, res) => {
     res.send('update product')

@@ -1,10 +1,32 @@
 const Product = require('../models/Product')
 const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, NotFoundError } = require('../errors') 
+const cloudinary = require('../utils/cloudinary')
+const {fileSizeFormatter} = require('../utils/multer')
 
 const createProduct = async (req, res) => {
     req.body.createdBy = req.user.userId
-    const product = await Product.create({...req.body, image: req.file.originalname})
+
+    let fileData = {};
+    if (req.file) {
+        // Save image to cloudinary
+        let uploadedFile 
+        try{
+            uploadedFile = await cloudinary.uploader.upload(req.file.path, {
+                folder: "products",
+                resource_type: "image",
+            });
+        }catch(error){
+            res.status(500);
+            throw new Error("Image could not be uploaded");
+        }
+
+        fileData = {
+            fileName: req.file.originalname,
+            filePath: uploadedFile.secure_url,
+        };
+    }
+    const product = await Product.create({...req.body, image: fileData})
     res.status(StatusCodes.CREATED).json({product})   
 }
 
@@ -26,7 +48,44 @@ const getProduct = async (req, res) => {
 }
 
 const updateProduct = async (req, res) => {
-    res.send('update product')
+    const {id: productId} = req.params          //getting the product id
+    const {userId} = req.user                   //getting the user id
+    const {name, category, quantity, price, description} = req.body
+
+    //seeing if that product exists
+    const product = await Product.findById(productId);
+    if(!product){
+        throw new NotFoundError(`No product with id ${productId}`)
+    }
+
+    
+    if(name === '' || category === '' || quantity === '' || price === '' || description === '' ){
+        throw new BadRequestError('Fields cannot be empty')
+    }
+
+    let fileData = {};
+    if (req.file) {
+        // Save image to cloudinary
+        let uploadedFile 
+        try{
+            uploadedFile = await cloudinary.uploader.upload(req.file.path, {
+                folder: "products",
+                resource_type: "image",
+            });
+        }catch(error){
+            res.status(500);
+            throw new Error("Image could not be uploaded");
+        }
+
+        fileData = {
+            fileName: req.file.originalname,
+            filePath: uploadedFile.secure_url,
+        };
+    }
+    
+
+    const updatedProduct = await Product.findOneAndUpdate({_id: productId, createdBy: userId}, {...req.body, image: Object.keys(fileData).length === 0 ? product?.image : fileData} , { new: true, runValidators: true })
+    res.status(StatusCodes.OK).json({updatedProduct})
 }
 
 const deleteProduct = async (req, res) => {

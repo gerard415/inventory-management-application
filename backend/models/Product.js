@@ -27,8 +27,8 @@ const ProductSchema = new mongoose.Schema({
         trim: true
     },
     image: {
-        type: String,
-        required: [true, 'please provide an image']
+        type: Object,
+        default: {}
     },
     createdBy: {
         type: mongoose.Types.ObjectId,

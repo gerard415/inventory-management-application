@@ -89,7 +89,15 @@ const updateProduct = async (req, res) => {
 }
 
 const deleteProduct = async (req, res) => {
-    res.send('delete product')
+    const {id: productId} = req.params
+    const {userId} = req.user
+    
+    const product = await Product.findOneAndRemove({_id: productId, createdBy: userId})
+    if(!product){
+        throw new NotFoundError(`No product with id ${productId}`)
+    }
+
+    res.status(StatusCodes.OK).send('product deleted')
 }
 
 module.exports = {

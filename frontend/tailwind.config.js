@@ -5,6 +5,10 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    fontFamily:{
+      'lato': ['lato', 'sans-serif'],
+      'poppins': ['Poppins', 'sans-serif']
+    }
   },
   plugins: [],
 }

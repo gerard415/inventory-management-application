@@ -9,7 +9,7 @@ const LoginPage = () => {
     const [password, setPassword] = useState<string>('')
     const [redirect, setRedirect] = useState<boolean>(false)
 
-    const {setUser, user}: UserProps = useContext(UserContext)
+    const {setUser}: UserProps = useContext(UserContext)
 
     const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -18,7 +18,6 @@ const LoginPage = () => {
             setUser(data)
             localStorage.setItem('user', JSON.stringify(data))
             setRedirect(true)
-            console.log(user)
         } catch (error) {
             return error
         }        

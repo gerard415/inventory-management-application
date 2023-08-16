@@ -1,8 +1,8 @@
 
 import {createContext, useEffect, useState} from 'react'
-import { UserProps } from './types'
+import { UserProps, userStateProps } from './types'
 
-export const UserContext  = createContext<UserProps>({} as UserProps)
+export const UserContext: React.Context<UserProps>  = createContext({} as UserProps)
 
 type UserContextProviderProps = {
     children: React.ReactNode
@@ -10,20 +10,19 @@ type UserContextProviderProps = {
 }
 
 const UserContextProvider = ({children}: UserContextProviderProps) => {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState<userStateProps | null>(null)
+    const [ready, setReady] = useState(false)
 
     useEffect(() => {
         const loggedInUser = localStorage.getItem("user");
         if (loggedInUser) {
-        const foundUser = JSON.parse(loggedInUser);
-        setUser(JSON.parse(loggedInUser));
-        console.log(user)
+            setUser(JSON.parse(loggedInUser));
         }
-        
+        setReady(true);
     }, [])
 
     return (
-        <UserContext.Provider value={{user, setUser}}>
+        <UserContext.Provider value={{user, setUser, ready}}>
             {children}
         </UserContext.Provider>
     )

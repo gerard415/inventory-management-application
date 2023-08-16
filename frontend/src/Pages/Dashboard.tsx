@@ -1,30 +1,37 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState, useEffect} from 'react'
 import { Navigate } from "react-router-dom";
 import { UserContext } from '../UserContext'
 import { UserProps } from '../types'
+import Loading from '../Components/Loading';
 
 const Dashboard = () => {
-    const {setUser, user}: UserProps = useContext(UserContext)
+    const {setUser, user, ready}: UserProps = useContext(UserContext)
     const [redirect,setRedirect] = useState<boolean>(false);
 
+
+    if(!ready){
+      return <Loading/>
+    }
+
+    if(ready && !user){
+      return <Navigate to={'/login'}/>
+    }
+
     const handleLogout = () => {
-      setUser({})
+      setUser(null)
       localStorage.removeItem("user")
       setRedirect(true)
     }
-
-    if(redirect){
-      return <Navigate to={'/'} />
+    
+    if(!user && redirect){
+      return <Navigate to={'/'} /> 
     }
 
-    if(!user){
-      return <Navigate to={'/register'}/> 
-    }
 
     return (
       <div className='flex flex-col'>
         <p>DashBoard</p>
-        <p>{user.name}</p>
+        <p>{user?.name}</p>
         <button className='border border-black w-[100px]' onClick={handleLogout} >Log Out</button>
       </div>
     )

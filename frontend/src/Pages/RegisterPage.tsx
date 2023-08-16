@@ -1,7 +1,6 @@
 import React, {useContext, useState} from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import axios from 'axios'
-import { useNavigate } from "react-router-dom";
 import { UserProps } from '../types';
 import { UserContext } from '../UserContext';
 
@@ -12,7 +11,7 @@ const RegisterPage= () => {
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
-    const {setUser, user}: UserProps = useContext(UserContext)
+    const {setUser}: UserProps = useContext(UserContext)
     const [redirect, setRedirect] = useState<boolean>(false)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

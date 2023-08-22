@@ -4,7 +4,7 @@ export type UserProps = {
         token?: string
     } | null,
     setUser: React.Dispatch<React.SetStateAction<userStateProps | null>>,
-    ready: boolean
+    ready: boolean,
 }
 
 export type userStateProps = {

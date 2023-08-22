@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { UserContext } from '../UserContext'
 import { UserProps } from '../types'
 import Loading from '../Components/Loading';
+import Layout from '../Components/Layout';
 
 const Dashboard = () => {
     const {setUser, user, ready}: UserProps = useContext(UserContext)
@@ -30,9 +31,8 @@ const Dashboard = () => {
 
     return (
       <div className='flex flex-col'>
-        <p>DashBoard</p>
-        <p>{user?.name}</p>
-        <button className='border border-black w-[100px]' onClick={handleLogout} >Log Out</button>
+        <Layout/>
+        {/* <button className='border border-black w-[100px]' onClick={handleLogout} >Log Out</button> */}
       </div>
     )
 }

@@ -7,7 +7,8 @@ module.exports = {
     extend: {},
     fontFamily:{
       'lato': ['lato', 'sans-serif'],
-      'poppins': ['Poppins', 'sans-serif']
+      'poppins': ['Poppins', 'sans-serif'],
+      'roboto': ['Roboto Condensed', 'sans-serif']
     }
   },
   plugins: [],

@@ -19,12 +19,16 @@ const ImageUploader = ({addedPhotos, setAddedPhotos}: ImageUploaderProps) => {
         for(let i = 0; i<files?.length; i++){
           data.append('images', files[i])
         }
-        const {data:images} = await axios.post('/products/upload', data, {
-          headers: {'Content-Type':'multipart/form-data'}
-        })
-        setUploading(false)
-        setAddedPhotos(prevState => [...prevState, ...images])
-        console.log(addedPhotos)
+        try {
+            const {data:images} = await axios.post('/products/upload', data, {
+            headers: {'Content-Type':'multipart/form-data'}
+            })
+            setUploading(false)
+            setAddedPhotos(prevState => [...prevState, ...images])
+            console.log(addedPhotos)
+        } catch (error) {
+            console.log(error)
+        }
     };
     
     const removeImage = (i:string) => {

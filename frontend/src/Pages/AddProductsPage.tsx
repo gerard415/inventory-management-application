@@ -23,11 +23,16 @@ const AddProductsPage = () => {
 
   const addNewProduct = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await axios.post('/products', {
-      name, category, quantity, price, description, images:addedPhotos
-    })
-    setRedirect(true)
-    console.log(name, category, quantity, price, description, addedPhotos)
+    try {
+      await axios.post('/products', {
+        name, category, quantity, price, description, images:addedPhotos
+      })
+      setRedirect(true)
+      console.log(name, category, quantity, price, description, addedPhotos)
+    } catch (error) {
+      console.log(error)
+    }
+    
   }
 
   if(redirect) {

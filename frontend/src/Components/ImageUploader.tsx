@@ -11,12 +11,15 @@ const ImageUploader = ({addedPhotos, setAddedPhotos}: ImageUploaderProps) => {
     const [dragActive, setDragActive] = useState<boolean>(false);
     const [uploading, setUploading] = useState<boolean>(false)
 
-    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLDivElement>, files:any) => {
+    const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement> | React.DragEvent<HTMLDivElement>, files:FileList | null) => {
         stopReload(e);
+        if(files === null) {
+            return;
+        }
         setDragActive(false);
         setUploading(true)
         const data = new FormData()
-        for(let i = 0; i<files?.length; i++){
+        for(let i = 0; i<files.length; i++){
           data.append('images', files[i])
         }
         try {

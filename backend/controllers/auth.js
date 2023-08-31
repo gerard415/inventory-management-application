@@ -8,7 +8,7 @@ const register = async (req, res) => {
     
     //the token was created using an instance method in the user model. you are invoking it here. so as not to clog up the controllers.
     const token = user.createJWT()
-    res.status(StatusCodes.CREATED).json({ name: user.name, token})
+    res.status(StatusCodes.CREATED).cookie('token', token).json({ name: user.name})
 }
 
 const login = async (req, res) => {
@@ -32,7 +32,7 @@ const login = async (req, res) => {
 
     //creating the token
     const token = user.createJWT()
-    res.status(StatusCodes.OK).json({ name: user.name, token})
+    res.status(StatusCodes.OK).cookie('token', token).json({ name: user.name})
 }
 
 module.exports = {

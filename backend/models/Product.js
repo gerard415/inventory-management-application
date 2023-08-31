@@ -10,6 +10,7 @@ const ProductSchema = new mongoose.Schema({
     category: {
         type: String,
         required: [true, 'please provide a category'],
+        enum:['electronics', 'stationery', 'cosmestics and personal hygiene', 'household', 'textiles', 'medical', 'vehicle', 'canned food', 'glass' ],
         maxlength: 20,
         minlength: 3
     },
@@ -26,9 +27,9 @@ const ProductSchema = new mongoose.Schema({
         required: [true, 'please provide the description'],
         trim: true
     },
-    image: {
-        type: Object,
-        default: {}
+    images: {
+        type: [Object],
+        default: []
     },
     createdBy: {
         type: mongoose.Types.ObjectId,

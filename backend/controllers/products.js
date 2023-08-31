@@ -2,31 +2,38 @@ const Product = require('../models/Product')
 const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, NotFoundError } = require('../errors') 
 const cloudinary = require('../utils/cloudinary')
+const fs = require('fs')
 const {fileSizeFormatter} = require('../utils/multer')
+
+const upload = async (req, res) => {
+    let fileData = [];
+    if (req.files) {
+        // Save image to cloudinary
+        let uploadedFile 
+        for(let i = 0; i< req.files.length; i++){
+            try {
+                const localFilePath = req.files[i].path
+                uploadedFile = await cloudinary.uploader.upload(localFilePath, {
+                    folder: "products",
+                    resource_type: "image",
+                })
+                fileData.push({
+                    fileName: req.files[i].originalname,
+                    filePath: uploadedFile.secure_url,
+                })
+
+            } catch (error) {
+                res.status(500);
+                throw new Error('Image could not be Uploaded');
+            }
+        }
+    }
+    res.json(fileData) 
+}
 
 const createProduct = async (req, res) => {
     req.body.createdBy = req.user.userId
-
-    let fileData = {};
-    if (req.file) {
-        // Save image to cloudinary
-        let uploadedFile 
-        try{
-            uploadedFile = await cloudinary.uploader.upload(req.file.path, {
-                folder: "products",
-                resource_type: "image",
-            });
-        }catch(error){
-            res.status(500);
-            throw new Error("Image could not be uploaded");
-        }
-
-        fileData = {
-            fileName: req.file.originalname,
-            filePath: uploadedFile.secure_url,
-        };
-    }
-    const product = await Product.create({...req.body, image: fileData})
+    const product = await Product.create({...req.body})
     res.status(StatusCodes.CREATED).json({product})   
 }
 
@@ -101,5 +108,5 @@ const deleteProduct = async (req, res) => {
 }
 
 module.exports = {
-    getAllProducts, createProduct, getProduct, updateProduct, deleteProduct
+    getAllProducts, createProduct, getProduct, updateProduct, deleteProduct, upload
 }

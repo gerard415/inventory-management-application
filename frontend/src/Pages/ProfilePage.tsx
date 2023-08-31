@@ -3,7 +3,7 @@ import DashboardHeader from '../Components/DashboardHeader'
 
 const ProfilePage = () => {
   return (
-    <div className='bg-gray-100 w-full ml-[250px] min-h-screen' >
+    <div className='bg-gray-100 w-full ml-[290px] min-h-screen' >
         <div className='bg-white' >
           <DashboardHeader/>
           <div className='h-[50px] p-3 flex items-center space-x-4' >

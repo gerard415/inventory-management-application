@@ -31,6 +31,6 @@ const fileSizeFormatter = (bytes, decimal) => {
     );
 };
 
-const upload = multer({storage, fileFilter})
+const photoMiddleware = multer({storage, fileFilter})
 
-module.exports = {upload, fileSizeFormatter}
+module.exports = {photoMiddleware, fileSizeFormatter}

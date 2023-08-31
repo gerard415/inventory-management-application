@@ -30,8 +30,8 @@ const SideBar = () => {
     }
 
     return (
-        <div className='w-[250px] h-screen  flex flex-col space-y-8 shadow-md fixed top-0 left-0 text-gray-500 '>
-            <div className='flex items-center  border pl-9 font-bold border-b-gray-300 h-[70px] text-sky-900 text-[30px] ' >
+        <div className='w-[290px] h-screen  flex flex-col space-y-8 shadow-md fixed top-0 left-0 text-gray-500 '>
+            <div className='flex items-center sticky top-0 z-10 border pl-9 font-bold border-b-gray-300 h-[70px] text-sky-900 text-[30px] ' >
                 StockX
             </div>
             <br />
@@ -78,10 +78,10 @@ const SideBar = () => {
                 </NavLink>
             </div>
 
-            <br /><br /><br /><br /><br /><br />
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
             <div className='w-full h-[30px] items-center justify-center '>
                 <button className='w-full pl-9 flex space-x-4 ' onClick={handleLogout} >
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-5"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" /></svg>
                     <span>Log Out</span>
                 </button>
             </div>

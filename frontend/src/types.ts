@@ -27,3 +27,13 @@ export type FileProps = {
     path: string,
     size: number
 }[]
+
+export type productProps = {
+    name: string,
+    category: 'electronics' | 'stationery'| 'cosmestics and personal hygiene'| 'household'| 'textiles'| 'medical'| 'vehicle'| 'canned food' | 'glass',
+    quantity: number,
+    price: number,
+    description: string,
+    images: imageProps[],
+    createdAt: string
+}[]

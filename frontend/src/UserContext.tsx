@@ -1,6 +1,6 @@
 
 import {createContext, useEffect, useState} from 'react'
-import { UserProps, userStateProps } from './types'
+import { UserProps, productProps, userStateProps } from './types'
 
 export const UserContext: React.Context<UserProps>  = createContext({} as UserProps)
 

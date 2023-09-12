@@ -91,23 +91,6 @@ const AddProductsPage = () => {
             </form>
           </div>
         </div>
-        {/* <div className='p-5  rounded-md px-5 text-gray-500 space-y-3 flex justify-center align-center ' >
-          <div className='bg-white'>
-            <span>Add Product</span>
-            <div>
-              <form>
-                <div className='flex justify-center space-x-[100px]'>
-                  <div className='border border-gray-300 w-[500px] h-[500px] rounded'></div>
-                  <div className='border border-gray-300 w-[500px] h-[500px] rounded'></div>
-                </div>
-                <div className='flex justify-end'>
-                  <button className=' border border-black w-[100px]'>Submit</button>
-                </div>
-              </form>
-            </div>
-          </div>
-            
-        </div> */}
       </div>
     </div>
   )

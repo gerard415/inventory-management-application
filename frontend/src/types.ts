@@ -1,15 +1,17 @@
 export type UserProps = {
-    user: {
-        name?: string,
-        token?: string
-    } | null,
+    user: userStateProps | null,
     setUser: React.Dispatch<React.SetStateAction<userStateProps | null>>,
     ready: boolean,
+    redirect: boolean,
+    setRedirect: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 export type userStateProps = {
     name: string,
-    token: string
+    email: string,
+    id: string,
+    phone?: number,
+    bio?: string
 }
 
 export type imageProps = {

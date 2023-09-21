@@ -4,29 +4,15 @@ import Loading from './Loading';
 import { Navigate } from "react-router-dom";
 import { UserContext } from '../UserContext'
 import { UserProps } from '../types'
+import axios from 'axios';
 
 const SideBar = () => {
-    const {setUser, user, ready}: UserProps = useContext(UserContext)
-    const [redirect,setRedirect] = useState<boolean>(false);
+    const {setUser, setRedirect}: UserProps = useContext(UserContext)
 
-
-    if(!ready){
-      return <Loading/>
-    }
-
-    if(ready && !user && !redirect){
-      return <Navigate to={'/login'}/>
-    }
-
-    const handleLogout = () => {
-      setUser(null)
-      localStorage.removeItem("user")
-      setRedirect(true)
-    }
-    
-    if(!user && redirect){
-        console.log('logged out')
-        return <Navigate to={'/'} /> 
+    const handleLogout = async () => {
+        await axios.post('/auth/logout')
+        setUser(null)
+        setRedirect(true)
     }
 
     return (

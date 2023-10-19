@@ -3,7 +3,7 @@ export type UserProps = {
     setUser: React.Dispatch<React.SetStateAction<userStateProps | null>>,
     ready: boolean,
     redirect: boolean,
-    setRedirect: React.Dispatch<React.SetStateAction<boolean>>
+    setRedirect: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 export type userStateProps = {

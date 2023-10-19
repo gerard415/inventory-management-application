@@ -23,6 +23,14 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'please provide a password'],
         minlength: 8
+    },
+    phone: {
+        type: Number,
+        default: 0
+    },
+    bio: {
+        type: String,
+        default: ''
     }
 })
 

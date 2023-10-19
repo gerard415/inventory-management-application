@@ -16,7 +16,6 @@ const LoginPage = () => {
         try {
             const {data} = await axios.post('/auth/login', {email,password})
             setUser(data)
-            localStorage.setItem('user', JSON.stringify(data))
             setRedirect(true)
         } catch (error) {
             return error

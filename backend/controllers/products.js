@@ -68,30 +68,9 @@ const updateProduct = async (req, res) => {
     
     if(name === '' || category === '' || quantity === '' || price === '' || description === '' ){
         throw new BadRequestError('Fields cannot be empty')
-    }
+    }    
 
-    let fileData = {};
-    if (req.file) {
-        // Save image to cloudinary
-        let uploadedFile 
-        try{
-            uploadedFile = await cloudinary.uploader.upload(req.file.path, {
-                folder: "products",
-                resource_type: "image",
-            });
-        }catch(error){
-            res.status(500);
-            throw new Error("Image could not be uploaded");
-        }
-
-        fileData = {
-            fileName: req.file.originalname,
-            filePath: uploadedFile.secure_url,
-        };
-    }
-    
-
-    const updatedProduct = await Product.findOneAndUpdate({_id: productId, createdBy: userId}, {...req.body, image: Object.keys(fileData).length === 0 ? product?.image : fileData} , { new: true, runValidators: true })
+    const updatedProduct = await Product.findOneAndUpdate({_id: productId, createdBy: userId}, {...req.body})
     res.status(StatusCodes.OK).json({updatedProduct})
 }
 

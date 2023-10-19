@@ -11,7 +11,7 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: [true, 'please provide a category'],
         enum:['electronics', 'stationery', 'cosmestics and personal hygiene', 'household', 'textiles', 'medical', 'vehicle', 'canned food', 'glass' ],
-        maxlength: 20,
+        maxlength: 32,
         minlength: 3
     },
     quantity: {

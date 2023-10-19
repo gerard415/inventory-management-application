@@ -40,25 +40,25 @@ const AddProductsPage = () => {
   }
 
   return (
-    <div className='bg-gray-100 w-full ml-[290px] min-h-screen' >
+    <div className='bg-gray-100 w-full' >
       <div className='bg-white sticky top-0 z-10'>
-        <DashboardHeader/>
+
       </div>
       <div className='p-5 flex justify-center items-center min-h-[647px]'>
         <div className='bg-white h-full w-full rounded-md flex flex-col p-5 px-[30px] space-y-3 text-gray-600'>
           <div>
-            <span className=''>Add Product</span>
+            <span className='font-bold text-[17px]'>Add Product</span>
           </div>
           <div>
             <form onSubmit={addNewProduct}>
-              <div className='flex justify-between'>
-                <div className='border border-gray-300 w-[550px] min-h-[510px] rounded-lg'>
+              <div className='grid grid-cols-1 md:grid-cols-2 gap-6'>
+                <div className='border border-gray-300  min-h-[510px] rounded-lg'>
                   <div className='p-5 space-y-5'>
                     <p>Add Images</p>
                     <ImageUploader addedPhotos={addedPhotos} setAddedPhotos={setAddedPhotos} />
                   </div>
                 </div>
-                <div className='border border-gray-300 w-[550px] min-h-[500px] rounded-lg p-5 space-y-3'>
+                <div className='border border-gray-300  min-h-[500px] rounded-lg p-5 space-y-3'>
                   <div className='space-y-1'>
                     <label htmlFor="name">Product Name</label>
                     <input type="text" id='name' value={name} onChange={(e) => setName(e.target.value) } placeholder='Navy Blue Sneakers' className='rounded h-[50px] w-full border border-gray-300 p-3 text-[14px]'/>

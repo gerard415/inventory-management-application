@@ -38,4 +38,5 @@ export type productProps = {
     description: string,
     images: imageProps[],
     createdAt: string
-}[]
+    _id: string
+}

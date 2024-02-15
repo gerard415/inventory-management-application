@@ -30,7 +30,7 @@ const Layout = () => {
         <DashboardHeader openSideBar={openSideBar} setOpenSideBar={setOpenSideBar} />
       </div>
       <div className='flex h-[90%]'>
-        <div className='w-[240px] hidden lg:inline fixed h-full'>
+        <div className='w-[240px] hidden lg:inline h-full'>
           <SideBar/>
         </div>
         {openSideBar? 
@@ -41,7 +41,7 @@ const Layout = () => {
           <SideBar/>
         </div>
         }
-        <div className={openSideBar ? 'w-full min-h-full lg:ml-[240px] bg-gray-900 opacity-50 lg:bg-gray-100 lg:opacity-100 overflow-hidden' : 'w-full lg:ml-[240px] bg-gray-100 min-h-full '}  onClick={() => setOpenSideBar(false)} >
+        <div className={openSideBar ? 'w-full min-h-full bg-gray-900 opacity-50 lg:bg-gray-100 lg:opacity-100 overflow-y-auto' : 'w-full bg-gray-100 min-h-full overflow-y-auto '}  onClick={() => setOpenSideBar(false)} >
           <Outlet/>
         </div>
       </div>

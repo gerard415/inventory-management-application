@@ -45,7 +45,8 @@ const getProfile = (req, res) => {
 
     if(token) {
         jwt.verify(token, process.env.JWT_SECRET, {}, async (err, user) => {
-            if(err) throw new Error
+            if(err) throw new BadRequestError('Please try again later')
+            
             const {name, email, _id, phone, bio} = await User.findById(user.userId)
             res.json({name, email, id:_id, phone, bio})
     })

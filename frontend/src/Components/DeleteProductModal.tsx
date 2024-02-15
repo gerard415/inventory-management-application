@@ -5,10 +5,11 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { productProps } from '../types';
 import axios from 'axios';
+import { errorNotification, successfulNotification } from '../notifications';
 
 type DeleteModalProps = {
     product: productProps,
-    setProducts: React.Dispatch<React.SetStateAction<productProps[]>>
+    setProducts: React.Dispatch<React.SetStateAction<productProps[] | undefined>>
 }
 
 const style = {
@@ -32,10 +33,12 @@ export default function DeleteProductModal({product, setProducts}: DeleteModalPr
     const deleteProduct = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
         e.preventDefault()
         try {
-          await axios.delete(`/products/${id}`)
-          setProducts(products => products.filter(product => product._id !== id))
+            await axios.delete(`/products/${id}`)
+            successfulNotification('product deleted successfully')
+            setProducts(products => products?.filter(product => product._id !== id))
         } catch (error) {
-          console.log(error)
+            errorNotification('error occured, Please try again later')
+            console.log(error)
         }
   
     }

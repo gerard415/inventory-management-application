@@ -110,11 +110,6 @@ export default function ViewProductModal({product}: EditModalProps) {
                   <button className='w-[120px] h-[32px] rounded-sm bg-red-500' onClick={(e) => closeModal(e)} >
                       Close
                   </button>
-                  <button className='w-[120px] h-[32px] rounded-sm border border-black disabled:border-gray-300 disabled:text-gray-400 ' 
-                      onClick={(e) => editProduct(e, product._id)}
-                  >
-                      Edit product
-                  </button>
                   </div>
               </div>
             </Box>

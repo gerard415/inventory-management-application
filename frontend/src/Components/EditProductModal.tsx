@@ -9,6 +9,7 @@ import { imageProps, productProps } from '../types';
 import ModalImageUploader from './ModalImageUploader';
 import ModalForm from './ModalForm';
 import axios from 'axios';
+import { errorNotification, successfulNotification } from '../notifications';
 
 type EditModalProps = {
   product: productProps,
@@ -46,9 +47,11 @@ export default function EditProductModal({product, setProduct}: EditModalProps) 
       await axios.patch(`/products/${id}`, {
         name, category, quantity, price, description, images:addedPhotos
       })
+      successfulNotification('product edited successfully')
       handleClose()
       setProduct(product)
     } catch (error) {
+      errorNotification('error occured, Please try again later')
       console.log(error)
     }
   }

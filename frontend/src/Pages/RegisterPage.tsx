@@ -3,6 +3,7 @@ import { Link, Navigate } from 'react-router-dom'
 import axios from 'axios'
 import { UserProps } from '../types';
 import { UserContext } from '../UserContext';
+import { errorNotification, successfulNotification } from '../notifications';
 
 const RegisterPage= () => {
 
@@ -18,10 +19,12 @@ const RegisterPage= () => {
         e.preventDefault()
         try {
             const {data} = await axios.post('http://localhost:5000/auth/register', {name: `${firstname}` + ` ${lastname}`, email, password})
+            successfulNotification('registration successful')
             setUser(data)
-            localStorage.setItem('user', JSON.stringify(data))
+            // localStorage.setItem('user', JSON.stringify(data))
             setRedirect(true)
         } catch (error) {
+            errorNotification('registration unsuccessful, please try again later')
             return error
         }
         

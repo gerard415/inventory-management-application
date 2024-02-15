@@ -7,7 +7,7 @@ import ProductComponent from '../Components/ProductComponent'
 import ProductFilters from '../Components/ProductFilters'
 
 const ProductsPage = () => {
-    const [products, setProducts] = useState<productProps[]>([])
+    const [products, setProducts] = useState<productProps[]>()
     const [product, setProduct] = useState<productProps>()
     const [loading, setLoading] = useState(false)
     const [category, setCategory] = useState('')
@@ -24,8 +24,8 @@ const ProductsPage = () => {
   
     let view
   
-    view =  products.map((product) => (
-              <ProductComponent key={product._id} product={product} setProducts={setProducts} setProduct={setProduct}/>
+    view =  products?.map((item) => (
+              <ProductComponent key={item._id} product={item} setProducts={setProducts} setProduct={setProduct}/>
             ))
       
     
@@ -52,8 +52,8 @@ const ProductsPage = () => {
                             <p className='w-[30%]'>Description</p>
                             <p className='w-[8%] pl-3'>Actions</p>
                         </div>
-                        <div className='w-full  '>
-                            {loading ? <Loading/> : view}
+                        <div className='w-full min-h-[400px] '>
+                            {!products ? <Loading/> : products && products.length === 0 ? <div className='h-[400px] p-4'>There are no products available</div> : view}
                         </div>
                     </div>
                 </div>

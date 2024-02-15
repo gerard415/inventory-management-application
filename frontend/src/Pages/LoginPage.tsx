@@ -3,6 +3,7 @@ import { Link, Navigate } from 'react-router-dom'
 import axios from 'axios'
 import { UserContext } from '../UserContext'
 import { UserProps } from '../types'
+import { errorNotification, successfulNotification } from '../notifications'
 
 const LoginPage = () => {
     const [email, setEmail] = useState<string>('')
@@ -15,9 +16,11 @@ const LoginPage = () => {
         e.preventDefault()
         try {
             const {data} = await axios.post('/auth/login', {email,password})
+            successfulNotification('login successful')
             setUser(data)
             setRedirect(true)
         } catch (error) {
+            errorNotification('login unsuccessful, please try again later')
             return error
         }        
     }

@@ -5,6 +5,7 @@ import { imageProps } from '../types'
 import axios from 'axios'
 import { categories } from '../data'
 import { Link, Navigate } from 'react-router-dom'
+import { errorNotification, successfulNotification } from '../notifications'
 
 const AddProductsPage = () => {
   const [name, setName] = useState<string>('')
@@ -27,9 +28,11 @@ const AddProductsPage = () => {
       await axios.post('/products', {
         name, category, quantity, price, description, images:addedPhotos
       })
+      successfulNotification('product added successfully')
       setRedirect(true)
       console.log(name, category, quantity, price, description, addedPhotos)
     } catch (error) {
+      errorNotification('error occured, Please try again later')
       console.log(error)
     }
     

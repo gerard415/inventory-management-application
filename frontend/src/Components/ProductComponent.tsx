@@ -10,25 +10,11 @@ import ViewProductModal from './ViewProductModal';
 
 type ProductComponentProps = {
     product :productProps,
-    setProducts: React.Dispatch<React.SetStateAction<productProps[]>>,
+    setProducts: React.Dispatch<React.SetStateAction<productProps[] | undefined>>,
     setProduct: React.Dispatch<React.SetStateAction<productProps | undefined>>
 }
 
-const ProductComponent = ({product, setProducts, setProduct}: ProductComponentProps) => {
-
-    const deleteProduct = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id:string) => {
-        e.preventDefault()
-        try {
-          await axios.delete(`/products/${id}`)
-          setProducts(products => products.filter(product => product._id !== id))
-        } catch (error) {
-          console.log(error)
-        }
-  
-    }
-
-    
-
+const ProductComponent = ({product, setProducts, setProduct}: ProductComponentProps) => { 
     return (
         <div key={product._id} className='border min-w-[1000px] border-gray-200 h-[40px] space-x-4 flex text-[13px] items-center px-3'>
             <div className='w-[22%] overflow-x-none  space-x-4 flex'>

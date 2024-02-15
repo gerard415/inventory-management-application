@@ -40,7 +40,7 @@ export const categories = [
     }
 ]
 
-export const getProducts = async (category:string, sort:string, price:string, setProducts:React.Dispatch<React.SetStateAction<productProps[]>>) => {
+export const getProducts = async (category:string, sort:string, price:string, setProducts:React.Dispatch<React.SetStateAction<productProps[] | undefined>>) => {
     let products: productProps[]
     const {data} = await axios.get('/products')
     products = data.products
